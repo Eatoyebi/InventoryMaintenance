@@ -26,12 +26,15 @@ namespace InventoryMaintenance
         //Liz Atoyebi, saves item and closes form
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (IsValidData())
+            int itemNo;
+            decimal price;
+
+            if (IsValidData() && int.TryParse(txtItemNo.Text, out itemNo) && decimal.TryParse(txtPrice.Text, out price))
             {
                 invItem = new InvItem(
-                    Convert.ToInt32(txtItemNo.Text),
+                    itemNo,
                     txtDescription.Text,
-                    Convert.ToDecimal(txtPrice));
+                    price);
                 this.Close();
             }
         }
@@ -46,7 +49,6 @@ namespace InventoryMaintenance
                    Validator.IsDecimal(txtPrice);
         }
 
-        //closes form
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
