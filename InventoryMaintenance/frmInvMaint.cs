@@ -15,6 +15,7 @@ namespace InventoryMaintenance
         public frmInvMaint()
         {
             InitializeComponent();
+            this.Text = "Liz Atoyebi's Inventory Maintenance Application";
         }
 
         // Add a statement here that declares the list of items.
