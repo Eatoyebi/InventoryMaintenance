@@ -18,10 +18,11 @@ namespace InventoryMaintenance
         }
 
         // Add a statement here that declares the list of items.
-
+        private List<InvItem> invItems = null;
         private void frmInvMaint_Load(object sender, EventArgs e)
         {
             // Add a statement here that gets the list of items.
+            invItems = InvItemDB.GetItems();
             FillItemListBox();
         }
 
@@ -29,12 +30,24 @@ namespace InventoryMaintenance
         {
             lstItems.Items.Clear();
             // Add code here that loads the list box with the items in the list.
+            foreach (InvItem item in invItems)
+            {
+                lstItems.Items.Add(item.GetDisplayText());
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             // Add code here that creates an instance of the New Item form
+            frmNewItem newItemForm = new frmNewItem();
             // and then gets a new item from that form.
+            InvItem newItem = newItemForm.GetNewItem();
+            if (newItem != null)
+            {
+                invItems.Add(newItem);
+                InvItemDB.SaveItems(invItems);
+                FillItemListBox();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -46,6 +59,13 @@ namespace InventoryMaintenance
                 // the deletion and then removes the item from the list,
                 // saves the list of products, and refreshes the list box
                 // if the deletion is confirmed.
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    invItems.RemoveAt(i);
+                    InvItemDB.SaveItems(invItems);
+                    FillItemListBox();
+                }
             }
         }
 
