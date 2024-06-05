@@ -15,33 +15,34 @@ namespace InventoryMaintenance
         public frmInvMaint()
         {
             InitializeComponent();
+            //Text property change
             this.Text = "Liz Atoyebi's Inventory Maintenance Application";
         }
 
-        // Add a statement here that declares the list of items.
+        //declares the list of items.
         private List<InvItem> invItems = null;
+        //loads form and retrieves list of items
         private void frmInvMaint_Load(object sender, EventArgs e)
         {
-            // Add a statement here that gets the list of items.
             invItems = InvItemDB.GetItems();
             FillItemListBox();
         }
 
+        //fills list w/ item details
         private void FillItemListBox()
         {
             lstItems.Items.Clear();
-            // Add code here that loads the list box with the items in the list.
             foreach (InvItem item in invItems)
             {
                 lstItems.Items.Add(item.GetDisplayText());
             }
         }
 
+        // Liz Atoyebi
+        //Opens New Item form to add new item
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // Add code here that creates an instance of the New Item form
             frmNewItem newItemForm = new frmNewItem();
-            // and then gets a new item from that form.
             InvItem newItem = newItemForm.GetNewItem();
             if (newItem != null)
             {
@@ -50,16 +51,13 @@ namespace InventoryMaintenance
                 FillItemListBox();
             }
         }
-
+        // Liz Atoyebi
+        //Deletes selected items from list
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int i = lstItems.SelectedIndex;
             if (i != -1)
             {
-                // Add code here that displays a dialog box to confirm
-                // the deletion and then removes the item from the list,
-                // saves the list of products, and refreshes the list box
-                // if the deletion is confirmed.
                 DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
@@ -69,7 +67,7 @@ namespace InventoryMaintenance
                 }
             }
         }
-
+        //Closes the application
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
