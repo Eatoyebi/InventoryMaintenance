@@ -19,7 +19,7 @@ namespace InventoryMaintenance
         private InvItem invItem = null;
 
         // Add a method here that gets and returns a new item.
-        public InvItem GetInvItem()
+        public InvItem GetNewItem()
         {
             this.ShowDialog();
             return invItem;
