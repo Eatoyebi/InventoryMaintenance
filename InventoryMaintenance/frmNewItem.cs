@@ -16,15 +16,26 @@ namespace InventoryMaintenance
         }
 
         // Add a statement here that declares the inventory item.
+        private InvItem invItem = null;
 
         // Add a method here that gets and returns a new item.
+        public InvItem GetInvItem()
+        {
+            this.ShowDialog();
+            return invItem;
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (IsValidData())
             {
                 // Add code here that creates a new item
+                invItem = new InvItem(
+                    Convert.ToInt32(txtItemNo.Text),
+                    txtDescription.Text,
+                    Convert.ToDecimal(txtPrice));
                 // and closes the form.
+                this.Close();
             }
         }
 
