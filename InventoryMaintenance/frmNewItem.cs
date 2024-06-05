@@ -14,31 +14,29 @@ namespace InventoryMaintenance
         {
             InitializeComponent();
         }
-
-        // Add a statement here that declares the inventory item.
+        //inventory
         private InvItem invItem = null;
 
-        // Add a method here that gets and returns a new item.
+        //Liz Atoyebi, gets and returns new item
         public InvItem GetNewItem()
         {
             this.ShowDialog();
             return invItem;
         }
-
+        //Liz Atoyebi, saves item and closes form
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (IsValidData())
             {
-                // Add code here that creates a new item
                 invItem = new InvItem(
                     Convert.ToInt32(txtItemNo.Text),
                     txtDescription.Text,
                     Convert.ToDecimal(txtPrice));
-                // and closes the form.
                 this.Close();
             }
         }
 
+        //validates input
         private bool IsValidData()
         {
             return Validator.IsPresent(txtItemNo) &&
@@ -48,6 +46,7 @@ namespace InventoryMaintenance
                    Validator.IsDecimal(txtPrice);
         }
 
+        //closes form
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
